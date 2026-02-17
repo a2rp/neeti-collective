@@ -21,15 +21,15 @@ const Initiatives = lazy(() => import("./pages/initiatives"));
 const InitiativeDetail = lazy(() => import("./pages/initiativeDetail"));
 
 /* Footer / legal */
-const Contact = lazy(() => import("./pages/placeholder"));
-const Terms = lazy(() => import("./pages/placeholder"));
-const Privacy = lazy(() => import("./pages/placeholder"));
-const SubmissionPolicy = lazy(() => import("./pages/placeholder"));
-const FraudAlerts = lazy(() => import("./pages/placeholder"));
-const Fellowships = lazy(() => import("./pages/placeholder"));
+const Contact = lazy(() => import("./pages/contact"));
+const Terms = lazy(() => import("./pages/terms"));
+const Privacy = lazy(() => import("./pages/privacy"));
+const SubmissionPolicy = lazy(() => import("./pages/submissionPolicy"));
+const FraudAlerts = lazy(() => import("./pages/fraudAlerts"));
+const Fellowships = lazy(() => import("./pages/fellowships"));
 
 /* Optional: generic placeholder */
-const ComingSoon = lazy(() => import("./pages/placeholder"));
+const ComingSoon = lazy(() => import("./pages/comingSoon"));
 
 const PageLoader = () => {
     return (

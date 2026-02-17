@@ -14,11 +14,11 @@ const WorkDetail = lazy(() => import("./pages/workDetail"));
 
 const About = lazy(() => import("./pages/about"));
 
-const Journal = lazy(() => import("./pages/placeholder"));
-const JournalDetail = lazy(() => import("./pages/placeholder"));
+const Journal = lazy(() => import("./pages/journal"));
+const JournalDetail = lazy(() => import("./pages/journalDetail"));
 
-const Initiatives = lazy(() => import("./pages/placeholder"));
-const InitiativeDetail = lazy(() => import("./pages/placeholder"));
+const Initiatives = lazy(() => import("./pages/initiatives"));
+const InitiativeDetail = lazy(() => import("./pages/initiativeDetail"));
 
 /* Footer / legal */
 const Contact = lazy(() => import("./pages/placeholder"));

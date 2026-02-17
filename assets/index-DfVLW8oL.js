@@ -1,4 +1,4 @@
-import{l as f,r as o,j as e,d as u,b as v,a as b,c as j,g as s,p as y,q as m,y as x,h as N}from"./index-CEqgXzdG.js";const w={Wrapper:f.section`
+import{l as f,r as o,j as e,d as u,b as v,a as b,c as j,g as s,p as y,q as m,y as x,h as N}from"./index-CrgLGKuv.js";const w={Wrapper:f.section`
         width: 100%;
         background: var(--color-bg);
 

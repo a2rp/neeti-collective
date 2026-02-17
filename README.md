@@ -7,6 +7,10 @@ This is a frontend-only implementation designed to be easily connected to a back
 
 ---
 
+![alt text](image.png)
+
+---
+
 ## Tech Stack
 
 - React 18

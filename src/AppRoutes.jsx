@@ -9,10 +9,10 @@ import ScrollToTop from "./components/scrollToTop";
 const Home = lazy(() => import("./pages/home"));
 
 /* Primary */
-const Work = lazy(() => import("./pages/placeholder"));
-const WorkDetail = lazy(() => import("./pages/placeholder"));
+const Work = lazy(() => import("./pages/work"));
+const WorkDetail = lazy(() => import("./pages/workDetail"));
 
-const About = lazy(() => import("./pages/placeholder"));
+const About = lazy(() => import("./pages/about"));
 
 const Journal = lazy(() => import("./pages/placeholder"));
 const JournalDetail = lazy(() => import("./pages/placeholder"));

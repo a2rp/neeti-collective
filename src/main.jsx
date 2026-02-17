@@ -4,8 +4,12 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
+const BASENAME = import.meta.env.PROD ? "/neeti-collective" : "/";
+
 createRoot(document.getElementById("root")).render(
-    <BrowserRouter basename="/neeti-collective">
-        <App />
-    </BrowserRouter>,
+    <StrictMode>
+        <BrowserRouter basename={BASENAME}>
+            <App />
+        </BrowserRouter>
+    </StrictMode>,
 );

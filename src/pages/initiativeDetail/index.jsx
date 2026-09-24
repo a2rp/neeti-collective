@@ -48,7 +48,7 @@ function ImageWithLoader({ src, alt, frameClassName = "" }) {
     );
 }
 
-const makeLocalDetail = (it) => {
+const makeLocalDetail = () => {
     return {
         goals: [
             "Strengthen execution capability under real constraints.",

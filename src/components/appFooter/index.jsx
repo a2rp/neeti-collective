@@ -1,214 +1,51 @@
-// AppFooter.jsx
-import React, { useMemo, useState } from "react";
-import {
-    FiGithub,
-    FiGlobe,
-    FiLinkedin,
-    FiFacebook,
-    FiInstagram,
-    FiYoutube,
-    FiArrowRight,
-} from "react-icons/fi";
+import { createElement, useMemo, useState } from "react";
+import { FaCodepen } from "react-icons/fa";
+import { FiArrowRight, FiCoffee, FiFacebook, FiGithub, FiGlobe, FiHeart, FiLinkedin, FiMail, FiStar, FiYoutube } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Styled } from "./styled";
+
+const links = [
+    ["Portfolio", "https://www.ashishranjan.net/", FiGlobe],
+    ["GitHub", "https://github.com/a2rp", FiGithub],
+    ["CodePen", "https://codepen.io/ash1198", FaCodepen],
+    ["LinkedIn", "https://www.linkedin.com/in/aashishranjan", FiLinkedin],
+    ["Facebook", "https://www.facebook.com/theash.ashish/", FiFacebook],
+    ["YouTube", "https://www.youtube.com/@ashishranjan-ashz?sub_confirmation=1", FiYoutube],
+    ["Email", "mailto:ash.ranjan09@gmail.com", FiMail],
+];
+const support = [
+    ["Support", "https://a2rp-donation-page.netlify.app/", FiHeart],
+    ["Buy Me a Coffee", "https://buymeacoffee.com/a2rp", FiCoffee],
+    ["Patreon", "https://patreon.com/a2rp", FiStar],
+];
+const legalLinks = [
+    ["Terms", "/terms"], ["Privacy", "/privacy"], ["Submission Policy", "/submission-policy"], ["Fraud Alerts", "/fraud-alerts"], ["Fellowships", "/fellowships"], ["Contact", "/contact"],
+];
+
+function IconLinks({ items }) {
+    return <div className="social">{items.map(([label, href, icon]) => <a key={label} className="socialIcon" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} aria-label={label} title={label}>{createElement(icon)}</a>)}</div>;
+}
 
 const AppFooter = ({ brand = "NeetiCollective" }) => {
     const year = new Date().getFullYear();
     const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const legalLinks = useMemo(
-        () => [
-            { label: "Terms", href: "/terms" },
-            { label: "Privacy", href: "/privacy" },
-            { label: "Submission Policy", href: "/submission-policy" },
-            { label: "Fraud Alerts", href: "/fraud-alerts" },
-            { label: "Fellowships", href: "/fellowships" },
-            { label: "Contact", href: "/contact" },
-        ],
-        [],
-    );
-
-    // Keep only real links active. Others can be added later.
-    const socials = useMemo(
-        () => [
-            {
-                label: "LinkedIn",
-                href: "https://www.linkedin.com/in/aashishranjan",
-                icon: <FiLinkedin />,
-            },
-            {
-                label: "GitHub",
-                href: "https://github.com/a2rp",
-                icon: <FiGithub />,
-            },
-            {
-                label: "Portfolio",
-                href: "https://www.ashishranjan.net",
-                icon: <FiGlobe />,
-            },
-            {
-                label: "Facebook",
-                href: "https://www.facebook.com/theash.ashish/",
-                icon: <FiFacebook />,
-            },
-
-            // placeholders (disabled but still “functional” UX)
-            {
-                label: "Instagram",
-                href: "",
-                icon: <FiInstagram />,
-                disabled: true,
-            },
-            { label: "YouTube", href: "", icon: <FiYoutube />, disabled: true },
-        ],
-        [],
-    );
-
-    const isValidEmail = (value) => {
-        const v = String(value || "").trim();
-        // simple & reliable for UI-level validation
-        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    const legal = useMemo(() => legalLinks, []);
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const value = email.trim();
+        if (!value || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) { toast.error("Please enter a valid email address."); return; }
+        setIsSubmitting(true);
+        await new Promise((resolve) => setTimeout(resolve, 650));
+        toast.success("You are subscribed. Updates will arrive in your inbox.");
+        setEmail("");
+        setIsSubmitting(false);
     };
-
-    // For now, this is a mock.
-    // Later replace with API call:
-    // return api.post("/newsletter/subscribe", { email })
-    const subscribeNewsletter = async (value) => {
-        await new Promise((r) => setTimeout(r, 650));
-        return { ok: true };
-    };
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-
-        const cleaned = email.trim();
-
-        if (!cleaned) {
-            toast.error("Please enter your email.");
-            return;
-        }
-
-        if (!isValidEmail(cleaned)) {
-            toast.error("Please enter a valid email address.");
-            return;
-        }
-
-        try {
-            setIsSubmitting(true);
-
-            const res = await subscribeNewsletter(cleaned);
-
-            if (!res?.ok) {
-                toast.error("Something went wrong. Please try again.");
-                return;
-            }
-
-            toast.success(
-                "You are subscribed. Updates will arrive in your inbox.",
-            );
-            setEmail("");
-        } catch (err) {
-            toast.error("Server error. Please try again later.");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const onSocialClick = (e, s) => {
-        if (s.disabled) {
-            e.preventDefault();
-            toast.info(`${s.label} will be added soon.`);
-        }
-    };
-
-    return (
-        <Styled.Wrapper>
-            <div className="inner">
-                <div className="stay">
-                    <div className="stayTitle">Stay up to date</div>
-                    <div className="staySub">
-                        Stay informed with the latest from us.
-                    </div>
-
-                    <form className="form" onSubmit={onSubmit}>
-                        <label className="srOnly" htmlFor="newsletterEmail">
-                            Email
-                        </label>
-
-                        <div className="pillForm">
-                            <input
-                                id="newsletterEmail"
-                                className="email"
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Your email"
-                                autoComplete="email"
-                                disabled={isSubmitting}
-                            />
-
-                            <button
-                                className="btn"
-                                type="submit"
-                                disabled={isSubmitting}
-                            >
-                                <span className="btnText">
-                                    {isSubmitting ? "Signing..." : "Sign up"}
-                                </span>
-                                <span className="btnIcon" aria-hidden="true">
-                                    <FiArrowRight />
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <div className="mid">
-                    <div className="copy">
-                        © {year} {brand}
-                    </div>
-
-                    <div className="legal" aria-label="Footer links">
-                        {legalLinks.map((l) => (
-                            <a
-                                key={l.label}
-                                className="legalLink"
-                                href={l.href}
-                            >
-                                {l.label}
-                            </a>
-                        ))}
-                    </div>
-
-                    <div className="social" aria-label="Social links">
-                        {socials.map((s) => (
-                            <a
-                                key={s.label}
-                                className={
-                                    s.disabled
-                                        ? "socialIcon disabled"
-                                        : "socialIcon"
-                                }
-                                href={s.href || "#"}
-                                target={s.disabled ? undefined : "_blank"}
-                                rel={s.disabled ? undefined : "noreferrer"}
-                                aria-label={s.label}
-                                title={s.label}
-                                onClick={(e) => onSocialClick(e, s)}
-                            >
-                                {s.icon}
-                            </a>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="bigWord" aria-hidden="true">
-                    {brand}
-                </div>
-            </div>
-        </Styled.Wrapper>
-    );
+    return <Styled.Wrapper><div className="inner">
+        <div className="stay"><div className="stayTitle">Stay up to date</div><div className="staySub">Stay informed with the latest from us.</div><form className="form" onSubmit={onSubmit}><label className="srOnly" htmlFor="newsletterEmail">Email</label><div className="pillForm"><input id="newsletterEmail" className="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Your email" autoComplete="email" disabled={isSubmitting} /><button className="btn" type="submit" disabled={isSubmitting}><span className="btnText">{isSubmitting ? "Signing..." : "Sign up"}</span><FiArrowRight /></button></div></form></div>
+        <div className="mid"><div className="copy">Copyright &copy; {year} <a href="https://www.ashishranjan.net/" target="_blank" rel="noopener noreferrer">Ashish Ranjan</a></div><div className="legal" aria-label="Legal links">{legal.map(([label, href]) => <a key={label} className="legalLink" href={href}>{label}</a>)}</div><div className="socialGroups"><div><span className="groupTitle">Links</span><IconLinks items={links} /></div><div><span className="groupTitle">Support</span><IconLinks items={support} /></div></div></div>
+        <div className="bigWord" aria-hidden="true">{brand}</div>
+    </div></Styled.Wrapper>;
 };
 
 export default AppFooter;

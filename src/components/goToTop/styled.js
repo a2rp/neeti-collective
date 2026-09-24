@@ -6,53 +6,21 @@ export const Styled = {
         right: 22px;
         bottom: 22px;
         z-index: 1200;
-
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-
         display: inline-flex;
         align-items: center;
         justify-content: center;
-
+        width: 44px;
+        height: 44px;
         border: 1px solid var(--color-border);
-        background: var(--color-bg);
+        border-radius: 14px;
         color: var(--color-text);
-
+        background: var(--color-bg);
         cursor: pointer;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(8px) scale(0.95);
-
-        transition:
-            opacity 160ms ease,
-            transform 160ms ease,
-            background 160ms ease,
-            box-shadow 160ms ease;
-
-        svg {
-            font-size: 1.2rem;
-        }
-
-        &:hover {
-            background: var(--color-primary-soft);
-            transform: translateY(0) scale(1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        &:active {
-            transform: scale(0.96);
-        }
-
-        &.show {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0) scale(1);
-        }
-
-        @media (max-width: 720px) {
-            right: 16px;
-            bottom: 16px;
-        }
+        transition: opacity 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        &.show { opacity: 1; pointer-events: auto; }
+        &:hover { border-color: var(--color-primary); box-shadow: 0 0 16px rgba(15,61,46,.18); }
+        @media (max-width: 720px) { right: 16px; bottom: 16px; }
     `,
 };

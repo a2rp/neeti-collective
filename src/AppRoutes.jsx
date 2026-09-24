@@ -1,6 +1,6 @@
 // AppRoutes.jsx
 import React, { Suspense, lazy } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import ScrollToTop from "./components/scrollToTop";
@@ -47,9 +47,14 @@ const PageLoader = () => {
     );
 };
 
+const EventRedirect = () => {
+    const { slug } = useParams();
+    return <Navigate to={`/initiatives/${slug}`} replace />;
+};
 const AppRoutes = () => {
+    const location = useLocation();
     return (
-        <Suspense fallback={<PageLoader />}>
+        <Suspense key={location.pathname} fallback={<PageLoader />}>
             <ScrollToTop />
 
             <Routes>
@@ -93,7 +98,7 @@ const AppRoutes = () => {
                 />
                 <Route
                     path="/events/:slug"
-                    element={<Navigate to="/initiatives/:slug" replace />}
+                    element={<EventRedirect />}
                 />
 
                 {/* Optional placeholder route for quick testing */}

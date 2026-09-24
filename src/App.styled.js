@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const HEADER_HEIGHT = "64px";
+const HEADER_HEIGHT = "72px";
 
 export const Styled = {
     Wrapper: styled.div`
@@ -49,6 +49,7 @@ export const Styled = {
     Main: styled.main`
         width: 100%;
         min-height: calc(100vh - ${HEADER_HEIGHT});
+        padding-top: ${HEADER_HEIGHT};
         background: var(--color-bg);
 
         .inner {
